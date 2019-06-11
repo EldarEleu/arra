@@ -5,7 +5,9 @@ var request = require("request");
 
 var MongoClient = require("mongodb").MongoClient
 var ObjectId = require("mongodb").ObjectID
-var url = "mongodb://127.0.0.1:27017"
+var url = "mongodb://admin:q2w3e4r5@ds261136.mlab.com:61136/heroku_695mr875"
+
+var port = process.env.PORT || 1337
 
 app.use(bodyParser.json());
 
@@ -111,7 +113,7 @@ function checkMyObj (checkProp) {
 */
 
 
-app.listen(1337, () => {
+app.listen(port, () => {
     console.log("Server listening on port 1337")
 })
 /*const testarr= [1,2,3,4.5,5,6.4,-7,5,6];
@@ -165,7 +167,7 @@ app.get("/music", (req, res)=>{
 app.get("/reg", (req,res)=>{
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
-        var dbo = db.db("lesson")
+        var dbo = db.db("heroku_695mr875")
         dbo.collection("users").findOne({login: req.query.login},(err,check)=> {
             if (err) throw err;
             if (!check){
@@ -192,7 +194,7 @@ app.get("/reg", (req,res)=>{
 app.get("/log", (req,res)=>{
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
-        var dbo = db.db("lesson")
+        var dbo = db.db("heroku_695mr875")
         dbo.collection("users").findOne({login: req.query.login, password: req.query.password},(err,check)=> {
             if (err) throw err;
             if (!check){
@@ -209,7 +211,7 @@ app.get("/log", (req,res)=>{
 app.get("/change", (req,res)=>{
     MongoClient.connect(url,(err,db)=>{
         if (err) throw err;
-        var dbo = db.db("lesson")
+        var dbo = db.db("heroku_695mr875")
         dbo.collection("users").updateOne({login: req.query.login, password: req.query.password},{$set: {password: req.query.new_password}},(err,check)=> {
             if (err) throw err;
             if (!check){
